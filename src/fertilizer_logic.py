@@ -22,6 +22,7 @@ actually prefer over a black-box classifier).
 
 import json
 from pathlib import Path
+from dosage_calculator import calculate_dosage
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROFILE_PATH = BASE_DIR / "models" / "crop_nutrient_profiles.json"
@@ -57,8 +58,17 @@ def _flag(value: float, mean: float, std: float, tolerance: float = 0.5):
         return "high"
     return "ok"
 
+def get_fertilizer_recommendation(
+    crop: str,
+    N: float,
+    P: float,
+    K: float,
+    ph: float,
+    farm_size: float,
+    unit: str = "acre",
+    profiles: dict = None
+) -> dict:
 
-def get_fertilizer_recommendation(crop: str, N: float, P: float, K: float, ph: float, profiles: dict = None) -> dict:
     """
     Compares the farmer's soil test values (N, P, K, ph) against the ideal
     profile for `crop` (derived from the training data) and returns a
@@ -79,17 +89,71 @@ def get_fertilizer_recommendation(crop: str, N: float, P: float, K: float, ph: f
     p_status = _flag(P, mean["P"], std["P"])
     k_status = _flag(K, mean["K"], std["K"])
     ph_status = _flag(ph, mean["ph"], std["ph"], tolerance=0.75)
+    
+    # Calculate nutrient deficiency (used by dosage calculator)
+    nutrient_gap = {
+    "N": max(0, mean["N"] - N),
+    "P": max(0, mean["P"] - P),
+    "K": max(0, mean["K"] - K),
+    }
 
     gaps = []
-    if n_status != "ok":
-        gaps.append(FERTILIZER_MAP[f"N_{n_status}"])
-    if p_status != "ok":
-        gaps.append(FERTILIZER_MAP[f"P_{p_status}"])
-    if k_status != "ok":
-        gaps.append(FERTILIZER_MAP[f"K_{k_status}"])
 
+    # Nitrogen recommendation
+    if n_status != "ok":
+        recommendation = FERTILIZER_MAP[f"N_{n_status}"].copy()
+
+        if n_status == "low":
+            recommendation["dosage"] = calculate_dosage(
+                fertilizer_name=recommendation["name"],
+                nutrient_gap=nutrient_gap["N"],
+                farm_size=farm_size,
+                unit=unit
+        )
+
+        gaps.append(recommendation)
+
+# Phosphorus recommendation
+    if p_status != "ok":
+        recommendation = FERTILIZER_MAP[f"P_{p_status}"].copy()
+
+        if p_status == "low":
+            recommendation["dosage"] = calculate_dosage(
+                fertilizer_name=recommendation["name"],
+                nutrient_gap=nutrient_gap["P"],
+                farm_size=farm_size,
+                unit=unit
+            )
+
+        gaps.append(recommendation)
+
+# Potassium recommendation
+    if k_status != "ok":
+        recommendation = FERTILIZER_MAP[f"K_{k_status}"].copy()
+
+        if k_status == "low":
+            recommendation["dosage"] = calculate_dosage(
+                fertilizer_name=recommendation["name"],
+                nutrient_gap=nutrient_gap["K"],
+                farm_size=farm_size,
+                unit=unit
+            )
+
+        gaps.append(recommendation)
+
+# Balanced soil
     if not gaps:
-        gaps.append(FERTILIZER_MAP["balanced"])
+        recommendation = FERTILIZER_MAP["balanced"].copy()
+
+        recommendation["dosage"] = {
+            "fertilizer": recommendation["name"],
+            "dosage_per_hectare": 0,
+            "farm_size": farm_size,
+            "unit": unit,
+            "total_required": 0
+}
+
+        gaps.append(recommendation)
 
     ph_note = None
     if ph_status == "low":
@@ -100,16 +164,36 @@ def get_fertilizer_recommendation(crop: str, N: float, P: float, K: float, ph: f
     return {
         "crop": crop,
         "input": {"N": N, "P": P, "K": K, "ph": ph},
-        "ideal": {"N": mean["N"], "P": mean["P"], "K": mean["K"], "ph": mean["ph"]},
-        "status": {"N": n_status, "P": p_status, "K": k_status, "ph": ph_status},
+        "ideal": {
+            "N": mean["N"],
+            "P": mean["P"],
+            "K": mean["K"],
+            "ph": mean["ph"]
+        },
+        "status": {
+            "N": n_status,
+            "P": p_status,
+            "K": k_status,
+            "ph": ph_status
+        },
+        "nutrient_gap": nutrient_gap,
         "recommendations": gaps,
         "ph_note": ph_note,
-    }
-
+}
 
 if __name__ == "__main__":
     profiles = load_profiles()
     # quick manual test
-    result = get_fertilizer_recommendation("rice", N=40, P=80, K=20, ph=5.0, profiles=profiles)
+    
+    result = get_fertilizer_recommendation(
+    "rice",
+    N=40,
+    P=80,
+    K=20,
+    ph=5.0,
+    farm_size=2,
+    unit="acre",
+    profiles=profiles
+)
     import pprint
     pprint.pprint(result)
