@@ -1,0 +1,505 @@
+/* ===================================
+   GOOGLE FONT
+=================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ===================================
+   GLOBAL
+=================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f5fff5;
+    color:#333;
+    overflow-x:hidden;
+}
+
+/* ===================================
+   NAVBAR
+=================================== */
+
+.navbar{
+    padding:15px 0;
+    transition:.4s;
+}
+
+.navbar-brand{
+    font-size:28px;
+    font-weight:700;
+}
+
+.navbar-brand img{
+    border-radius:50%;
+}
+
+.nav-link{
+    color:#fff !important;
+    margin-left:15px;
+    font-weight:500;
+    transition:.3s;
+}
+
+.nav-link:hover{
+    color:#ffe600 !important;
+}
+
+.btn-light{
+    border-radius:30px;
+    padding:10px 24px;
+    font-weight:600;
+}
+
+/* ===================================
+   HERO SECTION
+=================================== */
+
+.hero{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    background:
+    linear-gradient(rgba(0,0,0,.60),
+    rgba(0,0,0,.60)),
+    url("../images/farm-bg.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    color:white;
+
+    padding-top:100px;
+
+}
+
+.hero h1{
+
+    font-size:60px;
+
+    font-weight:700;
+
+    line-height:75px;
+
+}
+
+.hero p{
+
+    margin:25px 0;
+
+    font-size:20px;
+
+    line-height:34px;
+
+}
+
+.hero-img{
+
+    width:100%;
+
+    max-width:500px;
+
+    border-radius:20px;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+
+}
+
+/* ===================================
+   BUTTONS
+=================================== */
+
+.btn-success{
+
+    background:#198754;
+    border:none;
+    border-radius:40px;
+    padding:14px 32px;
+    font-weight:600;
+    transition:.3s;
+
+}
+
+.btn-success:hover{
+
+    transform:translateY(-4px);
+    box-shadow:0 10px 20px rgba(0,0,0,.2);
+
+}
+
+.btn-outline-light{
+
+    border-radius:40px;
+    padding:14px 32px;
+    font-weight:600;
+    transition:.3s;
+
+}
+
+.btn-outline-light:hover{
+
+    transform:translateY(-4px);
+
+}
+
+/* ===================================
+   SECTION TITLE
+=================================== */
+
+.section-title{
+
+    text-align:center;
+    font-size:42px;
+    font-weight:700;
+    color:#198754;
+    margin-bottom:60px;
+
+}
+
+/* ===================================
+   FEATURE CARDS
+=================================== */
+
+.feature-card{
+
+    background:#ffffff;
+    border-radius:20px;
+    padding:35px 25px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    transition:.4s;
+    height:100%;
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}
+
+.feature-card i{
+
+    font-size:60px;
+    color:#198754;
+    margin-bottom:20px;
+
+}
+
+.feature-card h4{
+
+    font-size:24px;
+    font-weight:600;
+    margin-bottom:15px;
+
+}
+
+.feature-card p{
+
+    color:#666;
+    line-height:28px;
+
+}
+
+/* ===================================
+   CROP CARDS
+=================================== */
+
+.crop-card{
+
+    border:none;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.4s;
+
+}
+
+.crop-card:hover{
+
+    transform:translateY(-10px);
+    box-shadow:0 20px 35px rgba(0,0,0,.18);
+
+}
+
+.crop-card img{
+
+    width:100%;
+    height:220px;
+    object-fit:cover;
+
+}
+
+.crop-card .card-body{
+
+    padding:25px;
+
+}
+
+.crop-card h5{
+
+    font-size:24px;
+    color:#198754;
+    font-weight:600;
+
+}
+
+.crop-card p{
+
+    color:#666;
+    margin-top:10px;
+
+}
+
+/* ===================================
+   STATS SECTION
+=================================== */
+
+.stats{
+
+    background:#198754;
+    padding:50px 0;
+
+}
+
+.stats .col-md-3{
+
+    text-align:center;
+    margin-bottom:15px;
+
+}
+
+.stats h2{
+
+    color:#ffffff !important;
+    font-size:32px;
+    font-weight:700;
+    margin-bottom:5px;
+    line-height:1;
+
+}
+
+.stats h5{
+
+    color:#ffffff;
+    font-size:16px;
+    font-weight:500;
+    margin:0;
+
+}
+
+/* ===================================
+   FOOTER
+=================================== */
+
+footer{
+
+    background:#111;
+    color:white;
+    padding:50px 0 20px;
+
+}
+
+footer h3{
+
+    font-weight:700;
+    margin-bottom:15px;
+
+}
+
+footer p{
+
+    color:#cccccc;
+
+}
+
+footer hr{
+
+    border-color:#555;
+    margin:20px 0;
+
+}
+
+/* ===================================
+   ANIMATION
+=================================== */
+
+.feature-card,
+.crop-card{
+
+    animation:fadeUp 1s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ===================================
+   SCROLLBAR
+=================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f2f2f2;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#198754;
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#146c43;
+
+}
+
+/* ===================================
+   RESPONSIVE
+=================================== */
+
+@media(max-width:992px){
+
+.hero{
+
+text-align:center;
+padding-top:120px;
+
+}
+
+.hero h1{
+
+font-size:45px;
+line-height:60px;
+
+}
+
+.hero-img{
+
+margin-top:40px;
+max-width:350px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.section-title{
+
+font-size:34px;
+
+}
+
+.hero h1{
+
+font-size:36px;
+line-height:48px;
+
+}
+
+.hero p{
+
+font-size:18px;
+
+}
+
+.stats h2{
+
+font-size:28px;
+
+}
+
+.stats h5{
+
+font-size:15px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.hero{
+
+padding-top:110px;
+
+}
+
+.hero h1{
+
+font-size:30px;
+line-height:42px;
+
+}
+
+.hero p{
+
+font-size:16px;
+
+}
+
+.btn{
+
+width:100%;
+margin-bottom:15px;
+
+}
+
+.crop-card{
+
+margin-bottom:20px;
+
+}
+
+.stats h2{
+
+font-size:24px;
+
+}
+
+.stats h5{
+
+font-size:14px;
+
+}
+
+}
