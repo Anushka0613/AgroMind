@@ -1,4 +1,6 @@
 # Nutrient content of common fertilizers (percentage)
+ACRE_TO_HECTARE = 0.4047
+
 FERTILIZER_CONTENT = {
         "Urea (46-0-0)": {
             "nutrient": "N",
@@ -50,7 +52,7 @@ def calculate_dosage(
     
     # Convert acres to hectares if required
     if unit.lower() == "acre":
-        area = farm_size * 0.4047
+        area = farm_size * ACRE_TO_HECTARE
     elif unit.lower() == "hectare":
         area = farm_size
     else:
@@ -58,14 +60,20 @@ def calculate_dosage(
     
     # Calculate fertilizer required per hectare
     dosage_per_hectare = (nutrient_gap * 100) / nutrient_percentage
+    # Calculate dosage in the selected unit
+    if unit.lower() == "acre":
+        dosage_per_unit = dosage_per_hectare * ACRE_TO_HECTARE
+    else:
+        dosage_per_unit = dosage_per_hectare
 
     # Calculate total fertilizer required for the given farm size
     total_required = dosage_per_hectare * area
 
     return {
-        "fertilizer": fertilizer_name,
-        "dosage_per_hectare": round(dosage_per_hectare, 2),
-        "farm_size": farm_size,
-        "unit": unit,
-        "total_required": round(total_required, 2)
-    }
+    "fertilizer": fertilizer_name,
+    "dosage_per_hectare": round(dosage_per_hectare, 2),
+    "dosage_per_unit": round(dosage_per_unit, 2),
+    "farm_size": farm_size,
+    "unit": unit,
+    "total_required": round(total_required, 2)
+}

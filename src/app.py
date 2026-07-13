@@ -55,6 +55,20 @@ with st.sidebar:
     rainfall = st.slider("Rainfall (mm)", 20.0, 300.0, 100.0)
 
     st.divider()
+    st.header("Farm Information")
+
+    farm_size = st.number_input(
+        "Farm Size",
+        min_value=0.1,
+        value=1.0,
+        step=0.1
+    )
+
+    unit = st.selectbox(
+        "Unit",
+        ["acre", "hectare"]
+    )
+    st.divider()
     st.header("GenAI Explanation (optional)")
     api_key = st.text_input("Anthropic API key", type="password", help="Leave blank to use the free template explanation instead.")
     language = st.selectbox("Explanation language", ["English", "Hindi", "Spanish", "French", "Punjabi", "Marathi"])
@@ -77,8 +91,22 @@ if run_btn:
         "top_5": list(zip(top_crops.tolist(), [round(p, 1) for p in top_probs.tolist()])),
     }
 
-    fert_result = get_fertilizer_recommendation(top_prediction, N, P, K, ph, profiles=profiles)
-
+    try:
+        fert_result = get_fertilizer_recommendation(
+            crop=top_prediction,
+            N=N,
+            P=P,
+            K=K,
+            ph=ph,
+            farm_size=farm_size,
+            unit=unit,
+            profiles=profiles
+            )
+        st.success("Fertilizer recommendation generated successfully!")
+    except ValueError as e:
+        st.error(str(e))
+        st.stop()
+    
     col1, col2 = st.columns([1, 1])
 
     with col1:
@@ -100,8 +128,26 @@ if run_btn:
         st.dataframe(status_df, hide_index=True, use_container_width=True)
 
         st.write("**Recommended action(s):**")
+
         for rec in fert_result["recommendations"]:
             st.markdown(f"- **{rec['name']}** — {rec['note']}")
+
+    # Show dosage if available
+            if "dosage" in rec:
+                d = rec["dosage"]
+
+                st.info(
+                f"""
+            📦 **Dosage Recommendation**
+
+            • Recommended dose: **{d['dosage_per_unit']} kg/{d['unit']}**
+
+            • Standard recommendation: **{d['dosage_per_hectare']} kg/hectare**
+
+            • Total fertilizer required: **{d['total_required']} kg**
+            """
+                )    
+
         if fert_result.get("ph_note"):
             st.info(fert_result["ph_note"])
 

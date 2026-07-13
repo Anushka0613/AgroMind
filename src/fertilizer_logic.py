@@ -43,6 +43,48 @@ def load_profiles() -> dict:
     with open(PROFILE_PATH) as f:
         return json.load(f)
 
+def validate_inputs(N, P, K, ph, farm_size):
+    """
+    Validate soil input values before generating recommendations.
+    Returns a list of validation error/warning messages.
+    """
+    errors = []
+
+    # Validate nutrient values
+    if N < 0:
+        errors.append("Nitrogen (N) cannot be negative.")
+
+    if P < 0:
+        errors.append("Phosphorus (P) cannot be negative.")
+
+    if K < 0:
+        errors.append("Potassium (K) cannot be negative.")
+
+    # Validate pH
+    if not (0 <= ph <= 14):
+        errors.append("Soil pH must be between 0 and 14.")
+
+    # Validate farm size
+    if farm_size <= 0:
+        errors.append("Farm size must be greater than 0.")
+
+    # Friendly warnings for unrealistic values
+    if farm_size <= 0:
+        errors.append("Please enter a farm size greater than 0.")
+
+    if N > 300:
+        errors.append("Nitrogen value appears unusually high. Please check your soil test report.")
+
+    if P > 300:
+        errors.append("Phosphorus value appears unusually high. Please check your soil test report.")
+
+    if K > 400:
+        errors.append("Potassium value appears unusually high. Please check your soil test report.")
+
+    if farm_size > 10000:
+        errors.append("Farm size appears unusually large. Please confirm the value and selected unit.")
+    
+    return errors
 
 def _flag(value: float, mean: float, std: float, tolerance: float = 0.5):
     """
@@ -75,6 +117,17 @@ def get_fertilizer_recommendation(
     structured recommendation: which nutrients are deficient/excess, the
     specific fertilizer to use, and a soil-pH note.
     """
+    validation_errors = validate_inputs(
+    N,
+    P,
+    K,
+    ph,
+    farm_size
+    )
+
+    if validation_errors:
+        raise ValueError("\n".join(validation_errors))
+    
     if profiles is None:
         profiles = load_profiles()
 
@@ -186,13 +239,13 @@ if __name__ == "__main__":
     # quick manual test
     
     result = get_fertilizer_recommendation(
-    "rice",
+    crop="rice",
     N=40,
-    P=80,
+    P=30,
     K=20,
-    ph=5.0,
+    ph=6.5,
     farm_size=2,
-    unit="acre",
+    unit="hectare",
     profiles=profiles
 )
     import pprint
