@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fertilizer Dosage Result</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+
+background:#f5fff5;
+
+}
+
+.card{
+
+margin-top:60px;
+
+border-radius:20px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="row justify-content-center">
+
+<div class="col-lg-8">
+
+<div class="card">
+
+<div class="card-header bg-success text-white text-center">
+
+<h2>
+
+🧮 Fertilizer Dosage Calculator
+
+</h2>
+
+</div>
+
+<div class="card-body">
+
+<h3 class="text-success">
+
+🌾 Crop :
+{{ crop }}
+
+</h3>
+
+<h5>
+
+📍 Land Area :
+{{ area }} Hectare
+
+</h5>
+
+<hr>
+
+<table class="table table-bordered table-hover">
+
+<thead class="table-success">
+
+<tr>
+
+<th>Fertilizer</th>
+
+<th>Required Quantity</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for fertilizer, quantity in dosage.items() %}
+
+<tr>
+
+<td>
+
+{{ fertilizer }}
+
+</td>
+
+<td>
+
+{{ quantity }} kg
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+<div class="text-center mt-4">
+
+<a href="/recommend" class="btn btn-success btn-lg">
+
+🔄 Calculate Again
+
+</a>
+
+<a href="/" class="btn btn-outline-success btn-lg ms-2">
+
+🏠 Home
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

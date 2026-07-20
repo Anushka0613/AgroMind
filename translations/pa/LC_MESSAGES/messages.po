@@ -1,0 +1,250 @@
+# Punjabi translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-07-20 14:05+0530\n"
+"PO-Revision-Date: 2026-07-20 14:06+0530\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: pa\n"
+"Language-Team: pa <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: templates/index.html:9 templates/index.html:174 templates/index.html:433
+#: templates/index.html:442 templates/recommend.html:228
+msgid "Smart Crop Recommendation System"
+msgstr ""
+
+#: templates/index.html:36 templates/login.html:25 templates/recommend.html:30
+#: templates/register.html:25
+msgid "Smart Crop"
+msgstr ""
+
+#: templates/index.html:75 templates/recommend.html:36
+msgid "Home"
+msgstr ""
+
+#: templates/index.html:81
+msgid "Recommend"
+msgstr ""
+
+#: templates/index.html:87
+msgid "History"
+msgstr ""
+
+#: templates/index.html:93
+msgid "About"
+msgstr ""
+
+#: templates/index.html:101
+msgid "Welcome"
+msgstr ""
+
+#: templates/index.html:107
+msgid "Logout"
+msgstr ""
+
+#: templates/index.html:115 templates/login.html:10 templates/login.html:41
+#: templates/login.html:104 templates/register.html:128
+msgid "Login"
+msgstr ""
+
+#: templates/index.html:121 templates/login.html:116 templates/register.html:10
+#: templates/register.html:116
+msgid "Register"
+msgstr ""
+
+#: templates/index.html:178
+msgid ""
+"Predict the best crop using Artificial Intelligence, Machine Learning and"
+" Soil Analysis."
+msgstr ""
+
+#: templates/index.html:182 templates/recommend.html:202
+msgid "Recommend Crop"
+msgstr ""
+
+#: templates/index.html:186
+msgid "Learn More"
+msgstr ""
+
+#: templates/index.html:211
+msgid "Why Choose Our System?"
+msgstr ""
+
+#: templates/index.html:222
+msgid "AI Prediction"
+msgstr ""
+
+#: templates/index.html:225
+msgid "Recommend the best crop using Machine Learning."
+msgstr ""
+
+#: templates/index.html:238
+msgid "Weather Analysis"
+msgstr ""
+
+#: templates/index.html:241
+msgid "Temperature, Rainfall & Humidity Analysis."
+msgstr ""
+
+#: templates/index.html:254
+msgid "Soil Testing"
+msgstr ""
+
+#: templates/index.html:257
+msgid "Analyze Nitrogen, Phosphorus & Potassium."
+msgstr ""
+
+#: templates/index.html:270
+msgid "99.32% Accuracy"
+msgstr ""
+
+#: templates/index.html:273
+msgid "Fast and highly accurate crop prediction."
+msgstr ""
+
+#: templates/index.html:294
+msgid "Popular Crops"
+msgstr ""
+
+#: templates/index.html:309
+msgid "Rice"
+msgstr ""
+
+#: templates/index.html:311
+msgid "Best for high rainfall regions."
+msgstr ""
+
+#: templates/index.html:328
+msgid "Wheat"
+msgstr ""
+
+#: templates/index.html:330
+msgid "Ideal crop for winter season."
+msgstr ""
+
+#: templates/index.html:347
+msgid "Maize"
+msgstr ""
+
+#: templates/index.html:349
+msgid "Suitable for warm climate."
+msgstr ""
+
+#: templates/index.html:366
+msgid "Cotton"
+msgstr ""
+
+#: templates/index.html:368
+msgid "High demand cash crop."
+msgstr ""
+
+#: templates/index.html:394
+msgid "Crops"
+msgstr ""
+
+#: templates/index.html:402
+msgid "Accuracy"
+msgstr ""
+
+#: templates/index.html:410
+msgid "Predictions"
+msgstr ""
+
+#: templates/index.html:418
+msgid "Support"
+msgstr ""
+
+#: templates/index.html:436 templates/recommend.html:234
+msgid "AI • Machine Learning • Flask • Agriculture"
+msgstr ""
+
+#: templates/index.html:443
+msgid "All Rights Reserved"
+msgstr ""
+
+#: templates/login.html:73 templates/register.html:87
+msgid "Email"
+msgstr ""
+
+#: templates/login.html:80
+msgid "Enter your email"
+msgstr ""
+
+#: templates/login.html:88 templates/register.html:101
+msgid "Password"
+msgstr ""
+
+#: templates/login.html:95
+msgid "Enter your password"
+msgstr ""
+
+#: templates/login.html:112
+msgid "Don't have an account?"
+msgstr ""
+
+#: templates/recommend.html:10 templates/recommend.html:56
+msgid "Crop Recommendation"
+msgstr ""
+
+#: templates/recommend.html:64
+msgid "Auto Fill Weather Data"
+msgstr ""
+
+#: templates/recommend.html:78
+msgid "Enter City Name (Example: Delhi)"
+msgstr ""
+
+#: templates/recommend.html:87
+msgid "Get Weather"
+msgstr ""
+
+#: templates/recommend.html:105
+msgid "Nitrogen (N)"
+msgstr ""
+
+#: templates/recommend.html:117
+msgid "Phosphorus (P)"
+msgstr ""
+
+#: templates/recommend.html:129
+msgid "Potassium (K)"
+msgstr ""
+
+#: templates/recommend.html:141
+msgid "Temperature (°C)"
+msgstr ""
+
+#: templates/recommend.html:155
+msgid "Humidity (%)"
+msgstr ""
+
+#: templates/recommend.html:169
+msgid "pH Value"
+msgstr ""
+
+#: templates/recommend.html:182
+msgid "Rainfall (mm)"
+msgstr ""
+
+#: templates/register.html:41
+msgid "Create Account"
+msgstr ""
+
+#: templates/register.html:73
+msgid "Username"
+msgstr ""
+
+#: templates/register.html:124
+msgid "Already have an account?"
+msgstr ""
+

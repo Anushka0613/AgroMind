@@ -1,0 +1,258 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2026-07-20\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: templates/index.html
+msgid "Smart Crop Recommendation System"
+msgstr "स्मार्ट फसल अनुशंसा प्रणाली"
+
+msgid "Smart Crop"
+msgstr "स्मार्ट क्रॉप"
+
+msgid "Home"
+msgstr "होम"
+
+msgid "Recommend"
+msgstr "सिफारिश"
+
+msgid "History"
+msgstr "इतिहास"
+
+msgid "About"
+msgstr "हमारे बारे में"
+
+msgid "Welcome"
+msgstr "स्वागत है"
+
+msgid "Logout"
+msgstr "लॉगआउट"
+
+msgid "Login"
+msgstr "लॉगिन"
+
+msgid "Register"
+msgstr "रजिस्टर"
+
+msgid "Predict the best crop using Artificial Intelligence, Machine Learning and Soil Analysis."
+msgstr "कृत्रिम बुद्धिमत्ता, मशीन लर्निंग और मिट्टी विश्लेषण का उपयोग करके सर्वोत्तम फसल की भविष्यवाणी करें।"
+
+msgid "Recommend Crop"
+msgstr "फसल की सिफारिश करें"
+
+msgid "Learn More"
+msgstr "और जानें"
+
+msgid "Why Choose Our System?"
+msgstr "हमारा सिस्टम क्यों चुनें?"
+
+msgid "AI Prediction"
+msgstr "एआई आधारित भविष्यवाणी"
+
+msgid "Recommend the best crop using Machine Learning."
+msgstr "मशीन लर्निंग की सहायता से सर्वोत्तम फसल की सिफारिश करें।"
+
+msgid "Weather Analysis"
+msgstr "मौसम विश्लेषण"
+
+msgid "Temperature, Rainfall & Humidity Analysis."
+msgstr "तापमान, वर्षा और आर्द्रता का विश्लेषण।"
+
+msgid "Soil Testing"
+msgstr "मिट्टी परीक्षण"
+
+msgid "Analyze Nitrogen, Phosphorus & Potassium."
+msgstr "नाइट्रोजन, फॉस्फोरस और पोटैशियम का विश्लेषण।"
+
+msgid "99.32% Accuracy"
+msgstr "99.32% सटीकता"
+
+msgid "Fast and highly accurate crop prediction."
+msgstr "तेज़ और अत्यधिक सटीक फसल भविष्यवाणी।"
+
+msgid "Popular Crops"
+msgstr "लोकप्रिय फसलें"
+
+msgid "Rice"
+msgstr "धान"
+
+msgid "Best for high rainfall regions."
+msgstr "अधिक वर्षा वाले क्षेत्रों के लिए सर्वोत्तम।"
+
+msgid "Wheat"
+msgstr "गेहूँ"
+
+msgid "Ideal crop for winter season."
+msgstr "सर्दियों के मौसम के लिए उपयुक्त फसल।"
+
+msgid "Maize"
+msgstr "मक्का"
+
+msgid "Suitable for warm climate."
+msgstr "गर्म जलवायु के लिए उपयुक्त।"
+
+msgid "Cotton"
+msgstr "कपास"
+
+msgid "High demand cash crop."
+msgstr "उच्च मांग वाली नकदी फसल।"
+
+msgid "Crops"
+msgstr "फसलें"
+
+msgid "Accuracy"
+msgstr "सटीकता"
+
+msgid "Predictions"
+msgstr "भविष्यवाणियाँ"
+
+msgid "Support"
+msgstr "सहायता"
+
+msgid "AI • Machine Learning • Flask • Agriculture"
+msgstr "एआई • मशीन लर्निंग • फ्लास्क • कृषि"
+
+msgid "All Rights Reserved"
+msgstr "सर्वाधिकार सुरक्षित"
+
+msgid "Email"
+msgstr "ईमेल"
+
+msgid "Enter your email"
+msgstr "अपना ईमेल दर्ज करें"
+
+msgid "Password"
+msgstr "पासवर्ड"
+
+msgid "Enter your password"
+msgstr "अपना पासवर्ड दर्ज करें"
+
+msgid "Don't have an account?"
+msgstr "क्या आपका खाता नहीं है?"
+
+msgid "Create Account"
+msgstr "खाता बनाएं"
+
+msgid "Username"
+msgstr "उपयोगकर्ता नाम"
+
+msgid "Already have an account?"
+msgstr "क्या आपका पहले से खाता है?"
+
+msgid "Crop Recommendation"
+msgstr "फसल अनुशंसा"
+
+msgid "Auto Fill Weather Data"
+msgstr "मौसम का डेटा स्वतः भरें"
+
+msgid "Enter City Name (Example: Delhi)"
+msgstr "शहर का नाम दर्ज करें (उदाहरण: दिल्ली)"
+
+msgid "Get Weather"
+msgstr "मौसम प्राप्त करें"
+
+msgid "Nitrogen (N)"
+msgstr "नाइट्रोजन (N)"
+
+msgid "Phosphorus (P)"
+msgstr "फॉस्फोरस (P)"
+
+msgid "Potassium (K)"
+msgstr "पोटैशियम (K)"
+
+msgid "Temperature (°C)"
+msgstr "तापमान (°C)"
+
+msgid "Humidity (%)"
+msgstr "आर्द्रता (%)"
+
+msgid "pH Value"
+msgstr "पीएच मान"
+
+msgid "Rainfall (mm)"
+msgstr "वर्षा (मिमी)"
+
+msgid "Crop Prediction"
+msgstr "फसल की भविष्यवाणी"
+
+msgid "Prediction Result"
+msgstr "भविष्यवाणी परिणाम"
+
+msgid "Predicted Crop"
+msgstr "अनुमानित फसल"
+
+msgid "Category"
+msgstr "श्रेणी"
+
+msgid "Description"
+msgstr "विवरण"
+
+msgid "Recommended Fertilizer"
+msgstr "अनुशंसित उर्वरक"
+
+msgid "Fertilizer Dosage"
+msgstr "उर्वरक की मात्रा"
+
+msgid "AI Recommendation"
+msgstr "एआई अनुशंसा"
+
+msgid "Prediction Accuracy"
+msgstr "भविष्यवाणी की सटीकता"
+
+msgid "Back"
+msgstr "वापस"
+
+msgid "Area (Hectare)"
+msgstr "क्षेत्रफल (हेक्टेयर)"
+
+msgid "Calculate Dosage"
+msgstr "मात्रा की गणना करें"
+
+msgid "Dosage Result"
+msgstr "मात्रा का परिणाम"
+
+msgid "Required Fertilizer"
+msgstr "आवश्यक उर्वरक"
+
+msgid "Prediction History"
+msgstr "भविष्यवाणी इतिहास"
+
+msgid "Crop"
+msgstr "फसल"
+
+msgid "Date"
+msgstr "तारीख"
+
+msgid "No Records Found"
+msgstr "कोई रिकॉर्ड नहीं मिला"
+
+msgid "Submit"
+msgstr "जमा करें"
+
+msgid "Reset"
+msgstr "रीसेट करें"
+
+msgid "Search"
+msgstr "खोजें"
+
+msgid "Loading..."
+msgstr "लोड हो रहा है..."
+
+msgid "Please Wait..."
+msgstr "कृपया प्रतीक्षा करें..."
+
+msgid "Language"
+msgstr "भाषा"
+
+msgid "English"
+msgstr "अंग्रेज़ी"
+
+msgid "Hindi"
+msgstr "हिन्दी"
+
+msgid "Punjabi"
+msgstr "पंजाबी"
+
