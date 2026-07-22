@@ -8,14 +8,16 @@ a clear, deterministic template so the app still works with zero API cost.
 """
 
 import os
-
-try:
-    import anthropic
-    HAS_ANTHROPIC_SDK = True
-except ImportError:
-    HAS_ANTHROPIC_SDK = False
+import streamlit as st
+from google import genai
 
 
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+client = genai.Client(api_key=GEMINI_API_KEY)
+print("\nAvailable Models:\n")
+
+for model in client.models.list():
+    print(model.name)
 def _template_explanation(crop_result: dict, fert_result: dict, language: str = "English") -> str:
     """Deterministic, no-API-key-needed fallback explanation."""
     crop = fert_result["crop"].capitalize()
@@ -60,13 +62,10 @@ def generate_explanation(crop_result: dict, fert_result: dict, api_key: str = No
     api_key: Anthropic API key (optional). If not supplied, falls back to template.
     language: target language for the explanation, e.g. "Hindi", "Spanish".
     """
-    api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
-
-    if not api_key or not HAS_ANTHROPIC_SDK:
-        return _template_explanation(crop_result, fert_result, language)
-
+    # Gemini client is already initialized above.
+    # We will always try Gemini first.
+    
     try:
-        client = anthropic.Anthropic(api_key=api_key)
         prompt = f"""You are an agricultural extension officer talking to a farmer.
 
 ML model output:
@@ -89,12 +88,10 @@ smallholder farmer with no technical background. Explain:
 3) exactly what fertilizer to apply and why.
 Do not use bullet points with technical jargon like 'z-score' or 'std dev'. Be practical."""
 
-        response = client.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=500,
-            messages=[{"role": "user", "content": prompt}],
+        response = client.models.generate_content(
+            model="gemini-3.5-flash",
+            contents=prompt,
         )
-        return response.content[0].text
+        return response.text
     except Exception as e:
-        fallback = _template_explanation(crop_result, fert_result, language)
-        return f"[AI explanation unavailable ({e}), showing template instead]\n\n{fallback}"
+        raise e

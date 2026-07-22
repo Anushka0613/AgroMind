@@ -9,11 +9,12 @@ Run with:
 
 import sys
 from pathlib import Path
-
+import base64
 import joblib
 import numpy as np
 import pandas as pd
 import streamlit as st
+
 
 SRC_DIR = Path(__file__).resolve().parent
 BASE_DIR = SRC_DIR.parent
@@ -22,11 +23,23 @@ sys.path.append(str(SRC_DIR))
 
 from fertilizer_logic import get_fertilizer_recommendation, load_profiles
 from genai_explainer import generate_explanation
+import genai_explainer
 
 FEATURES = ["N", "P", "K", "temperature", "humidity", "ph", "rainfall"]
 
 st.set_page_config(page_title="AI Crop & Fertilizer Advisor", page_icon="🌾", layout="wide")
+# ---------- Load External CSS ----------
+def load_css():
+    css_file = SRC_DIR / "assets" / "css" / "main.css"
 
+    if css_file.exists():
+        with open(css_file) as f:
+            st.markdown(
+                f"<style>{f.read()}</style>",
+                unsafe_allow_html=True
+            )
+
+load_css()
 
 @st.cache_resource
 def load_artifacts():
@@ -38,7 +51,8 @@ def load_artifacts():
 
 model, label_encoder, profiles = load_artifacts()
 
-st.title("🌾 AI-Powered Crop & Fertilizer Recommendation System")
+
+st.title("🌾 AgroMind: AI Crop & Fertilizer Recommendation System")
 st.caption(
     "Enter your soil test values and local climate data to get a crop recommendation, "
     "a fertilizer plan, and a plain-language explanation."
@@ -69,11 +83,18 @@ with st.sidebar:
         ["acre", "hectare"]
     )
     st.divider()
-    st.header("GenAI Explanation (optional)")
-    api_key = st.text_input("Anthropic API key", type="password", help="Leave blank to use the free template explanation instead.")
-    language = st.selectbox("Explanation language", ["English", "Hindi", "Spanish", "French", "Punjabi", "Marathi"])
-    run_btn = st.button("🔍 Get Recommendation", type="primary", use_container_width=True)
+    st.header("🤖 AI Explanation")
 
+    language = st.selectbox(
+        "Explanation language",
+        ["English", "Hindi", "Spanish", "French", "Punjabi", "Marathi"]
+    )
+
+    run_btn = st.button(
+        "🔍 Get Recommendation",
+        type="primary",
+        use_container_width=True
+    )
 if run_btn:
     input_df = pd.DataFrame([[N, P, K, temperature, humidity, ph, rainfall]], columns=FEATURES)
 
@@ -154,7 +175,7 @@ if run_btn:
     st.divider()
     st.subheader("💬 Farmer-Friendly Explanation")
     with st.spinner("Generating explanation..."):
-        explanation = generate_explanation(crop_result, fert_result, api_key=api_key, language=language)
+        explanation = generate_explanation(crop_result, fert_result, language=language)
     st.write(explanation)
 
 else:
@@ -163,5 +184,5 @@ else:
     st.markdown("""
     1. **Crop model** — a Random Forest trained on 2,200 soil/climate samples across 22 crops predicts the best-fit crop(s) for your conditions.
     2. **Fertilizer advisor** — a rule-based engine compares your soil's N, P, K and pH against the ideal profile for the recommended crop (derived from the same training data) and flags deficiencies or excesses.
-    3. **GenAI layer** — an LLM (or a built-in template if no API key is given) turns the numbers into a short, practical explanation in your preferred language.
-    """)
+    3. **AI Explanation** — Gemini 3.5 Flash converts the prediction and fertilizer plan into a simple, farmer-friendly explanation in your selected language.
+     """)
