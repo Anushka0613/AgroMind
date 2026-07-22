@@ -209,3 +209,25 @@ environmental runoff from over-fertilization).
   guidance (which fertilizer, not how much). A dosage model is a natural v2.
 - Add a chatbot mode so farmers can ask free-form follow-up questions
   ("what if I can't get DAP, what's a substitute?").
+
+## 11. Gemini API Setup
+
+1. Get a Gemini API key from Google AI Studio.
+2. Create a `.env` file in the project root.
+3. Add:
+
+```env
+GEMINI_API_KEY=your_api_key_here
+```
+
+4. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+5. Run the application:
+
+```bash
+python -m streamlit run src/app.py
+```

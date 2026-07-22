@@ -1,25 +1,24 @@
 """
 genai_explainer.py
 -------------------
-Turns the ML crop prediction + rule-based fertilizer recommendation into a
-plain-language explanation a farmer can act on, in the language of their
-choice. Uses the Anthropic API if a key is supplied; otherwise falls back to
-a clear, deterministic template so the app still works with zero API cost.
+Generates a farmer-friendly explanation for the ML crop prediction and
+fertilizer recommendation using the Google Gemini API. The explanation
+can be generated in the user's selected language. If the Gemini service
+is temporarily unavailable, a graceful fallback message is returned.
 """
 
 import os
 import streamlit as st
+from dotenv import load_dotenv
 from google import genai
 
 
+load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 client = genai.Client(api_key=GEMINI_API_KEY)
-print("\nAvailable Models:\n")
 
-for model in client.models.list():
-    print(model.name)
 def _template_explanation(crop_result: dict, fert_result: dict, language: str = "English") -> str:
-    """Deterministic, no-API-key-needed fallback explanation."""
+    """Optional rule-based fallback explanation."""
     crop = fert_result["crop"].capitalize()
     top_crop = crop_result["top_prediction"]
     confidence = crop_result["confidence"]
@@ -55,18 +54,15 @@ def _template_explanation(crop_result: dict, fert_result: dict, language: str = 
     return "\n".join(lines)
 
 
-def generate_explanation(crop_result: dict, fert_result: dict, api_key: str = None, language: str = "English") -> str:
+def generate_explanation(crop_result: dict, fert_result: dict, language: str = "English") -> str:
     """
     crop_result: {"top_prediction": str, "confidence": float, "top_5": [(crop, prob), ...]}
     fert_result: output of fertilizer_logic.get_fertilizer_recommendation()
-    api_key: Anthropic API key (optional). If not supplied, falls back to template.
+    api_key: Reserved for compatibility. Gemini API key is loaded from the environment.
     language: target language for the explanation, e.g. "Hindi", "Spanish".
     """
-    # Gemini client is already initialized above.
-    # We will always try Gemini first.
-    
-    try:
-        prompt = f"""You are an agricultural extension officer talking to a farmer.
+
+    prompt = f"""You are an agricultural extension officer talking to a farmer.
 
 ML model output:
 - Recommended crop: {crop_result['top_prediction']} (confidence {crop_result['confidence']:.1f}%)
@@ -86,12 +82,20 @@ smallholder farmer with no technical background. Explain:
 1) why this crop is a good fit,
 2) what's off in their soil (if anything) in simple terms,
 3) exactly what fertilizer to apply and why.
-Do not use bullet points with technical jargon like 'z-score' or 'std dev'. Be practical."""
+Do not use bullet points with technical jargon like 'z-score' or 'std dev'. Be practical.
+"""
 
+    try:
         response = client.models.generate_content(
-            model="gemini-3.5-flash",
+            model="gemini-3.6-flash",
             contents=prompt,
         )
         return response.text
-    except Exception as e:
-        raise e
+
+    except Exception:
+        return (
+            f"⚠️ AI explanation is temporarily unavailable.\n\n"
+            f"Recommended Crop: {crop_result['top_prediction']}\n\n"
+            f"The crop prediction and fertilizer recommendation are still valid. "
+            f"Please try generating the AI explanation again in a few moments."
+        )
