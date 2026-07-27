@@ -1,0 +1,7 @@
+model,test_accuracy,weighted_f1,cv_mean_accuracy,cv_std
+Random Forest,0.9932,0.9932,0.9949,0.0052
+XGBoost,0.9886,0.9886,0.9898,0.005
+SVM (RBF),0.9841,0.9839,0.9739,0.0071
+Decision Tree,0.9795,0.9794,0.9835,0.0049
+KNN,0.9773,0.9772,0.9773,0.0048
+Logistic Regression,0.95,0.95,0.9722,0.0077
