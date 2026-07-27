@@ -1,3 +1,13 @@
+"""
+dosage_calculator.py
+---------------------
+Converts a nutrient gap (kg/ha of N, P or K needed) into a real,
+purchasable fertilizer dosage: which product to use, how much to apply
+per unit area, and the total amount needed for the farmer's given farm
+size. Used internally by fertilizer_logic.get_fertilizer_recommendation()
+whenever a nutrient is found to be deficient.
+"""
+
 # Nutrient content of common fertilizers (percentage)
 ACRE_TO_HECTARE = 0.4047
 

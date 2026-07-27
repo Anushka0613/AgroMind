@@ -1,0 +1,805 @@
+/* =========================================================
+   AgroMind — Main Stylesheet
+   Theme: Modern, Minimal, Glassmorphism, Green + White AI Dashboard
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+  --primary-dark:#2E7D32;
+  --primary:#4CAF50;
+  --primary-light:#81C784;
+  --primary-bg:#E8F5E9;
+  --white:#FFFFFF;
+  --accent-bg:#F4F7F6;
+  --text-dark:#1B2E1E;
+  --text-muted:#5B6B5E;
+  --glass-bg:rgba(255,255,255,0.55);
+  --glass-border:rgba(255,255,255,0.35);
+  --shadow-soft:0 8px 32px rgba(46,125,50,0.12);
+  --shadow-hover:0 16px 40px rgba(46,125,50,0.22);
+  --radius-lg:26px;
+  --radius-md:18px;
+  --radius-sm:12px;
+}
+
+/* ---------- Global resets ---------- */
+html, body, [class*="css"]{
+  font-family:'Poppins', sans-serif !important;
+  color:var(--text-dark);
+}
+
+.stApp{
+  background:linear-gradient(160deg, var(--accent-bg) 0%, var(--primary-bg) 45%, #ffffff 100%);
+  background-attachment:fixed;
+}
+
+#MainMenu, header[data-testid="stHeader"]{background:transparent;}
+footer{visibility:hidden;}
+
+.block-container{
+  padding-top:1.4rem;
+  padding-bottom:2rem;
+  max-width:1200px;
+}
+
+/* Hide default streamlit branding spacing quirks */
+div[data-testid="stDecoration"]{display:none;}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar{width:8px;height:8px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--primary-light);border-radius:10px;}
+::-webkit-scrollbar-thumb:hover{background:var(--primary);}
+
+/* =========================================================
+   Animations
+   ========================================================= */
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+@keyframes slideUp{
+  from{opacity:0; transform:translateY(28px);}
+  to{opacity:1; transform:translateY(0);}
+}
+@keyframes slideInRight{
+  from{opacity:0; transform:translateX(40px);}
+  to{opacity:1; transform:translateX(0);}
+}
+@keyframes float{
+  0%,100%{transform:translateY(0px);}
+  50%{transform:translateY(-14px);}
+}
+@keyframes pulseGlow{
+  0%,100%{box-shadow:0 0 0 0 rgba(76,175,80,0.35);}
+  50%{box-shadow:0 0 0 14px rgba(76,175,80,0);}
+}
+@keyframes typingDot{
+  0%,80%,100%{opacity:0.25; transform:scale(0.75);}
+  40%{opacity:1; transform:scale(1);}
+}
+@keyframes gradientShift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.fade-in{animation:fadeIn 0.8s ease both;}
+.slide-up{animation:slideUp 0.7s cubic-bezier(.22,1,.36,1) both;}
+.slide-up-1{animation:slideUp 0.7s cubic-bezier(.22,1,.36,1) 0.08s both;}
+.slide-up-2{animation:slideUp 0.7s cubic-bezier(.22,1,.36,1) 0.18s both;}
+.slide-up-3{animation:slideUp 0.7s cubic-bezier(.22,1,.36,1) 0.28s both;}
+.slide-up-4{animation:slideUp 0.7s cubic-bezier(.22,1,.36,1) 0.38s both;}
+.float-anim{animation:float 5s ease-in-out infinite;}
+
+/* =========================================================
+   Glass card base
+   ========================================================= */
+.glass-card{
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-soft);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  padding:1.6rem 1.8rem;
+  transition:transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease;
+}
+.glass-card:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow-hover);
+}
+
+/* =========================================================
+   Sidebar
+   ========================================================= */
+section[data-testid="stSidebar"]{
+  background:linear-gradient(180deg, #1B5E20 0%, #2E7D32 55%, #388E3C 100%);
+  border-right:none;
+}
+/* Remove Streamlit default spacing between sidebar widgets */
+section[data-testid="stSidebar"] div[data-testid="element-container"]{
+    margin-bottom:0 !important;
+}
+
+section[data-testid="stSidebar"] div.stButton{
+    margin-bottom:0.15rem !important;
+}
+section[data-testid="stSidebar"] *{
+  color:#F1FFF2 !important;
+}
+.sidebar-brand{
+  display:flex; align-items:center; gap:.6rem;
+  padding:.4rem 0 1.2rem 0;
+  border-bottom:1px solid rgba(255,255,255,0.18);
+  margin-bottom:1.1rem;
+}
+.sidebar-brand .logo-emoji{font-size:2rem;}
+.sidebar-brand .brand-text{font-weight:700; font-size:1.25rem; letter-spacing:.3px;}
+.sidebar-brand .brand-sub{font-size:.68rem; opacity:.75; font-weight:400; margin-top:-2px;}
+
+section[data-testid="stSidebar"] .stButton>button{
+
+    width:100%;
+
+    text-align:left;
+
+    background:rgba(255,255,255,.07);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:16px;
+
+    padding:.78rem 1rem;
+
+    margin:0;
+
+    font-weight:600;
+
+    font-size:1rem;
+
+    transition:all .25s ease;
+
+    box-shadow:none;
+}
+section[data-testid="stSidebar"] .stButton>button:hover{
+  background:rgba(255,255,255,0.18);
+  border-color:rgba(255,255,255,0.35);
+  transform:translateX(4px);
+}
+section[data-testid="stSidebar"] div.nav-active-marker ~ div.stButton > button{
+  background:rgba(255,255,255,0.92) !important;
+  color:var(--primary-dark) !important;
+  font-weight:600;
+}
+section[data-testid="stSidebar"] div.nav-active-marker ~ div.stButton > button *{color:var(--primary-dark) !important;}
+
+.sidebar-footer-note{
+
+    border-top:1px solid rgba(255,255,255,.15);
+
+    margin-top:.8rem;
+
+    padding-top:.9rem;
+
+    text-align:center;
+
+    font-size:.82rem;
+
+    opacity:.75;
+
+    font-weight:600;
+
+}
+
+/* =========================================================
+   Hero section
+   ========================================================= */
+.hero-section{
+  position:relative;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  min-height:480px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:3rem 2.5rem;
+  margin:1.6rem 0;
+  text-align:center;
+}
+.hero-bg-image{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  opacity:0.16;
+  z-index:0;
+  pointer-events:none;
+}
+.hero-content{
+  position:relative;
+  z-index:1;
+  max-width:720px;
+  margin:0 auto;
+}
+.hero-badge{
+  display:inline-flex; align-items:center; gap:.4rem;
+  background:var(--white);
+  border:1px solid var(--primary-light);
+  color:var(--primary-dark);
+  font-size:.78rem; font-weight:600;
+  padding:.35rem .9rem; border-radius:999px;
+  box-shadow:var(--shadow-soft);
+  margin-bottom:1.1rem;
+}
+.hero-title{
+  font-size:4.1rem;
+  font-weight:800;
+  letter-spacing:-1.5px;
+  line-height:1.05;
+  margin:0;
+  background:linear-gradient(100deg, var(--primary-dark), var(--primary) 55%, var(--primary-light));
+  background-size:200% 200%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:gradientShift 6s ease infinite;
+}
+.hero-tagline{
+  font-size:1.35rem;
+  font-weight:600;
+  color:var(--text-dark);
+  margin-top:.5rem;
+}
+.hero-sub{
+  font-size:1.02rem;
+  color:var(--text-muted);
+  max-width:480px;
+  margin:.9rem auto 0 auto;
+  line-height:1.6;
+}
+
+/* CTA button rendered through st.button gets targeted via key-based class below */
+/* Start Prediction button (outside sidebar only) */
+[data-testid="stAppViewContainer"] .stButton > button{
+    background:linear-gradient(95deg, var(--primary-dark), var(--primary)) !important;
+    color:var(--white) !important;
+    border:none !important;
+    border-radius:999px;
+    padding:.85rem 2.1rem;
+    font-size:1.05rem;
+    font-weight:700;
+    box-shadow:0 10px 24px rgba(46,125,50,.25);
+    transition:all .25s ease;
+}
+
+[data-testid="stAppViewContainer"] .stButton > button:hover{
+    background:linear-gradient(95deg, #1B5E20, var(--primary-dark)) !important;
+    transform:translateY(-3px);
+    box-shadow:0 14px 32px rgba(46,125,50,.35);
+}
+
+/* floating feature chips under hero */
+.floating-row{display:flex; gap:1rem; margin-top:2.4rem; flex-wrap:wrap; justify-content:center;}
+.floating-chip{
+  flex:1 1 200px;
+  max-width:260px;
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius-md);
+  backdrop-filter:blur(14px);
+  padding:1rem 1.1rem;
+  box-shadow:var(--shadow-soft);
+  transition:transform .3s ease, box-shadow .3s ease;
+  text-align:left;
+}
+.floating-chip:hover{transform:translateY(-8px); box-shadow:var(--shadow-hover);}
+.floating-chip .chip-icon{font-size:1.6rem; margin-bottom:.35rem; display:block;}
+.floating-chip .chip-title{font-weight:600; font-size:.92rem; color:var(--primary-dark);}
+.floating-chip .chip-sub{font-size:.78rem; color:var(--text-muted); margin-top:.15rem;}
+
+/* =========================================================
+   Section headers
+   ========================================================= */
+.section-title{
+  font-size:1.9rem;
+  font-weight:700;
+  color:var(--primary-dark);
+  margin-bottom:.15rem;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  line-height:1.25;
+}
+.section-sub{
+  color:var(--text-muted);
+  font-size:.95rem;
+  margin-bottom:1.4rem;
+}
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  font-size:.72rem;
+  font-weight:700;
+  color:var(--primary);
+}
+
+/* =========================================================
+   Stat / dashboard cards
+   ========================================================= */
+.stat-card{
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius-md);
+  backdrop-filter:blur(16px);
+  box-shadow:var(--shadow-soft);
+  padding:1.15rem 1.2rem;
+  display:flex; align-items:center; gap:.9rem;
+  transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease;
+  min-height:96px;
+}
+.stat-card:hover{transform:translateY(-6px); box-shadow:var(--shadow-hover);}
+.stat-icon{
+  width:52px; height:52px;
+  border-radius:16px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.5rem;
+  background:linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+  color:var(--white);
+  box-shadow:0 6px 16px rgba(46,125,50,0.35);
+  flex-shrink:0;
+}
+.stat-label{font-size:.76rem; color:var(--text-muted); font-weight:500;}
+.stat-value{font-size:1.18rem; font-weight:700; color:var(--text-dark); line-height:1.25;}
+
+/* =========================================================
+   Form styling
+   ========================================================= */
+.form-card{
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius-lg);
+  backdrop-filter:blur(18px);
+  box-shadow:var(--shadow-soft);
+  padding:1.8rem 2rem 1.2rem 2rem;
+  margin-bottom:1.2rem;
+}
+.form-group-label{
+    font-weight:600;
+    font-size:.92rem;
+    color:var(--primary-dark);
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+    margin:0 0 .3rem 0;
+}
+
+/* Normalize row-to-row spacing across different widget types (slider,
+   selectbox, number_input each have slightly different default heights
+   and internal spacing) so every form row lines up consistently
+   regardless of which widget it contains. .stSlider/.stSelectbox/
+   .stNumberInput are Streamlit's own stable public wrapper classes. */
+div[data-testid="stForm"] .stSlider,
+div[data-testid="stForm"] .stSelectbox,
+div[data-testid="stForm"] .stNumberInput{
+  margin-bottom:1.1rem;
+}
+
+.stSlider label, .stNumberInput label, .stSelectbox label{
+  font-weight:500 !important;
+  color:var(--text-dark) !important;
+  font-size:.9rem !important;
+}
+/* Defensive backup for the AgroMind green slider theme, in case the
+   .streamlit/config.toml primaryColor isn't picked up in some
+   environment. data-baseweb is an attribute supplied by the underlying
+   BaseWeb widget library itself (not a Streamlit-internal testid), so
+   it's a reasonably stable, semantic selector to rely on here. */
+div[data-baseweb="slider"]>div>div>div{background:var(--primary) !important;}
+div[data-baseweb="slider"] div[role="slider"]{
+  background:var(--white) !important;
+  border:3px solid var(--primary-dark) !important;
+  box-shadow:0 2px 8px rgba(46,125,50,0.4) !important;
+}
+div[data-baseweb="slider"] > div:first-child{
+  background:var(--primary-bg) !important;
+}
+
+/* ---------- Dropdown (st.selectbox) closed-control overlap fix ----------
+   Root cause (confirmed via a controlled A/B test: main.css toggled
+   on/off, bug only present when loaded): min-height:46px !important was
+   forced onto the INNER value-container div, while the OUTER
+   div[data-baseweb="select"] control kept Streamlit's own native
+   (shorter) default height -- nothing here set a matching height on the
+   outer box. The inner content was forced taller than the box meant to
+   contain it, so it no longer agreed with where the separately
+   positioned arrow indicator sits, producing the overlap. Removed the
+   height override entirely; the control now inherits Streamlit's
+   default layout. Background/border/border-radius are paint-only (they
+   don't affect box height/position) and are kept to preserve the
+   AgroMind card look.
+
+   Separately: an earlier native-theme fill issue (Streamlit's
+   primaryColor being applied natively to an inner sub-element) is
+   neutralized by forcing every descendant's background to transparent
+   -- safe regardless of which exact inner element is affected, since a
+   transparent background can never cover or hide anything. Only the
+   single outer control gets an explicit visible background. */
+.stSelectbox div[data-baseweb="select"] *{
+  color:var(--text-dark) !important;
+  background:transparent !important;
+}
+.stSelectbox div[data-baseweb="select"] > div{
+  background-color:var(--white) !important;
+  border:1px solid var(--glass-border) !important;
+  border-radius:12px !important;
+}
+ul[data-baseweb="menu"]{
+  background:var(--white) !important;
+}
+ul[data-baseweb="menu"] li,
+ul[data-baseweb="menu"] li *{
+  color:var(--text-dark) !important;
+  background-color:transparent !important;
+}
+ul[data-baseweb="menu"] li:hover{
+  background:var(--primary-bg) !important;
+}
+
+/* ---------- Real Streamlit-native form container ----------
+   st.form() already gives every form a stable, always-present wrapper
+   (div[data-testid="stForm"]). Styling it directly -- instead of the
+   previous unclosed <div class="form-card"> markdown calls split across
+   multiple st.markdown() invocations -- is what actually makes the glass
+   card visually contain the form controls, since Streamlit renders each
+   st.markdown() call as its own isolated DOM fragment and a tag opened in
+   one fragment can never wrap sibling content rendered by a later call. */
+div[data-testid="stForm"]{
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border) !important;
+  border-radius:var(--radius-lg);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:var(--shadow-soft);
+  padding:1.8rem 2rem 1.2rem 2rem;
+  margin-bottom:1.2rem;
+}
+
+/* ---------- st.container(key=...) card wrappers ----------
+   Same fix, same reasoning, applied via Streamlit's native keyed
+   container (the officially supported way to attach a stable CSS hook
+   to a real container) for the two cards that aren't backed by st.form:
+   the AI explanation chat card, and the crop-result hero card. */
+.st-key-crop_confidence_chart_card{
+  background:var(--white);
+  border-radius:var(--radius-lg);
+  padding:1.4rem 1.6rem;
+  box-shadow:var(--shadow-soft);
+  border:1px solid #e3efe4;
+  margin-top:1.6rem;
+}
+.st-key-ai_chat_card{
+  background:var(--white);
+  border-radius:var(--radius-lg);
+  padding:1.4rem;
+  box-shadow:var(--shadow-soft);
+  border:1px solid #e3efe4;
+  animation:slideUp 0.7s cubic-bezier(.22,1,.36,1) both;
+}
+.st-key-crop_result_hero{
+  background:linear-gradient(135deg, var(--primary-dark), var(--primary));
+  border-radius:var(--radius-lg);
+  padding:2rem 2.2rem;
+  color:var(--white);
+  box-shadow:var(--shadow-hover);
+  position:relative;
+  overflow:hidden;
+  animation:slideUp 0.7s cubic-bezier(.22,1,.36,1) both;
+}
+.st-key-crop_result_hero::after{
+  content:"";
+  position:absolute; right:-40px; top:-40px;
+  width:180px; height:180px;
+  background:rgba(255,255,255,0.12);
+  border-radius:50%;
+}
+.st-key-crop_result_hero *{color:var(--white) !important;}
+.stNumberInput input{
+    border-radius:12px !important;
+    border:1px solid #cfe3d2 !important;
+    background:rgba(255,255,255,.85) !important;
+    min-height:46px !important;
+    margin-top:4px !important;
+}
+
+/* ==========================================
+   Crop/Fertilizer Submit Button
+========================================== */
+
+/* IMPORTANT:
+   Streamlit 1.60+ selectboxes use an internal <button> (React Aria ComboBox).
+   Do NOT target all buttons inside stForm, or the dropdown arrow will expand
+   and cover the selected value.
+   Style only the form submit button.
+*/
+button[data-testid="stBaseButton-secondaryFormSubmit"] {
+    width: 100% !important;
+    background: #2E7D32 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 14px !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    padding: 0.85rem 1rem !important;
+    box-shadow: 0 8px 22px rgba(46,125,50,.25) !important;
+    transition: all .25s ease !important;
+}
+
+button[data-testid="stBaseButton-secondaryFormSubmit"]:hover {
+    background: #256628 !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(46,125,50,.35) !important;
+}
+
+/* generic secondary button */
+.secondary-btn .stButton>button{
+  background:var(--white);
+  color:var(--primary-dark) !important;
+  border:1.5px solid var(--primary);
+  border-radius:999px;
+  font-weight:600;
+  padding:.55rem 1.6rem;
+  transition:all .25s ease;
+}
+.secondary-btn .stButton>button:hover{
+  background:var(--primary-bg);
+  transform:translateY(-2px);
+}
+
+/* ==========================================
+   Crop Confidence Graph
+========================================== */
+
+.confidence-card{
+    margin-top:18px;
+    padding:1.4rem 1.6rem;
+}
+
+.confidence-row{
+    display:grid;
+    grid-template-columns:170px 1fr 70px;
+    align-items:center;
+    gap:18px;
+    margin:18px 0;
+}
+
+.confidence-label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:600;
+    color:var(--text-dark);
+    font-size:1rem;
+}
+
+.confidence-emoji{
+    font-size:1.3rem;
+}
+
+.confidence-bar{
+    width:100%;
+    height:14px;
+    background:#E6F3E8;
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.confidence-progress{
+    height:100%;
+    border-radius:999px;
+    background:linear-gradient(
+        90deg,
+        #2E7D32,
+        #43A047,
+        #81C784
+    );
+    transition:width .8s ease;
+}
+
+.confidence-value{
+    text-align:right;
+    font-weight:700;
+    color:#2E7D32;
+    font-size:1rem;
+}
+/* =========================================================
+   Result cards
+   ========================================================= */
+.result-hero-card{
+  background:linear-gradient(135deg, var(--primary-dark), var(--primary));
+  border-radius:var(--radius-lg);
+  padding:2rem 2.2rem;
+  color:var(--white);
+  box-shadow:var(--shadow-hover);
+  position:relative;
+  overflow:hidden;
+}
+.result-hero-card::after{
+  content:"";
+  position:absolute; right:-40px; top:-40px;
+  width:180px; height:180px;
+  background:rgba(255,255,255,0.12);
+  border-radius:50%;
+}
+.result-badge-emoji{font-size:3.4rem; line-height:1;}
+.result-crop-name{font-size:2.1rem; font-weight:800; margin:.2rem 0 .1rem 0;}
+.result-confidence-label{font-size:.85rem; opacity:.85; font-weight:500;}
+.confidence-track{
+  background:rgba(255,255,255,0.28);
+  border-radius:999px; height:10px; margin-top:.4rem; overflow:hidden;
+}
+.confidence-fill{
+  background:var(--white);
+  height:100%; border-radius:999px;
+  transition:width 1.2s cubic-bezier(.22,1,.36,1);
+}
+
+.fert-card{
+  border-radius:var(--radius-lg);
+  padding:1.6rem 1.8rem;
+  box-shadow:var(--shadow-soft);
+  border-left:6px solid var(--primary);
+  background:var(--white);
+}
+.fert-card .fert-title{font-size:1.3rem; font-weight:700; color:var(--primary-dark);}
+.fert-tag{
+  display:inline-block; background:var(--primary-bg); color:var(--primary-dark);
+  font-size:.78rem; font-weight:600; padding:.25rem .7rem; border-radius:999px; margin-top:.4rem;
+}
+
+.tip-card{
+  background:var(--white);
+  border-radius:var(--radius-md);
+  padding:1rem 1.2rem;
+  box-shadow:var(--shadow-soft);
+  border-top:4px solid var(--primary-light);
+  transition:transform .3s ease;
+}
+.tip-card:hover{transform:translateY(-5px);}
+
+/* =========================================================
+   AI Chat bubble (Gemini explanation)
+   ========================================================= */
+.ai-chat-wrap{
+  background:var(--white);
+  border-radius:var(--radius-lg);
+  padding:1.4rem;
+  box-shadow:var(--shadow-soft);
+  border:1px solid #e3efe4;
+}
+.ai-chat-header{
+  display:flex; align-items:center; gap:.55rem;
+  margin-bottom:.9rem; font-weight:600; color:var(--primary-dark);
+}
+.ai-avatar{
+  width:36px; height:36px; border-radius:50%;
+  background:linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.1rem; color:var(--white);
+  flex-shrink:0;
+}
+.chat-bubble{
+  background:var(--primary-bg);
+  border-radius:18px 18px 18px 4px;
+  padding:1rem 1.2rem;
+  max-height:340px;
+  overflow-y:auto;
+  color:var(--text-dark);
+  font-size:.95rem;
+  line-height:1.7;
+  box-shadow:inset 0 0 0 1px rgba(76,175,80,0.15);
+}
+.typing-dots{display:inline-flex; gap:4px; padding:.3rem 0;}
+.typing-dots span{
+  width:8px; height:8px; border-radius:50%;
+  background:var(--primary);
+  animation:typingDot 1.2s infinite;
+}
+.typing-dots span:nth-child(2){animation-delay:.2s;}
+.typing-dots span:nth-child(3){animation-delay:.4s;}
+
+/* =========================================================
+   About section cards
+   ========================================================= */
+.about-card{
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius-md);
+  backdrop-filter:blur(14px);
+  box-shadow:var(--shadow-soft);
+  padding:1.4rem 1.5rem;
+  height:100%;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.about-card:hover{transform:translateY(-6px); box-shadow:var(--shadow-hover);}
+.about-icon{font-size:1.9rem; margin-bottom:.5rem; display:block;}
+.about-card h4{margin:0 0 .3rem 0; color:var(--primary-dark); font-size:1.05rem;}
+.about-card p{margin:0; color:var(--text-muted); font-size:.87rem; line-height:1.55;}
+
+.tech-pill{
+  display:inline-block;
+  background:var(--white);
+  border:1px solid var(--primary-light);
+  color:var(--primary-dark);
+  font-weight:600; font-size:.82rem;
+  padding:.4rem 1rem;
+  border-radius:999px;
+  margin:.25rem .3rem .25rem 0;
+  box-shadow:var(--shadow-soft);
+  transition:all .25s ease;
+}
+.tech-pill:hover{background:var(--primary-bg); transform:translateY(-3px);}
+
+/* =========================================================
+   Footer
+   ========================================================= */
+.app-footer{
+  text-align:center;
+  padding:1.6rem 0 .6rem 0;
+  margin-top:2rem;
+  border-top:1px solid rgba(46,125,50,0.15);
+  color:var(--text-muted);
+  font-size:.85rem;
+}
+.app-footer .heart{color:#e53935;}
+.app-footer .brand{color:var(--primary-dark); font-weight:700;}
+
+/* =========================================================
+   Misc / responsive
+   ========================================================= */
+hr.soft-divider{
+  border:none; border-top:1px solid rgba(46,125,50,0.15); margin:1.6rem 0;
+}
+
+@media (max-width: 900px){
+  .hero-title{font-size:2.6rem;}
+  .hero-section{padding:2.2rem 1.4rem; min-height:340px;}
+  .hero-content{max-width:100%;}
+}
+
+/* ==========================================
+   Plotly Confidence Chart
+========================================== */
+
+.confidence-wrapper{
+
+    background: rgba(255,255,255,.88);
+
+    border: 1px solid rgba(255,255,255,.65);
+
+    border-radius: 24px;
+
+    backdrop-filter: blur(18px);
+
+    box-shadow: var(--shadow-soft);
+
+    padding: 28px;
+
+    margin-top: 20px;
+
+    transition: all .3s ease;
+
+}
+
+.confidence-wrapper:hover{
+
+    transform: translateY(-4px);
+
+    box-shadow: var(--shadow-hover);
+
+}
+

@@ -54,15 +54,40 @@ def _template_explanation(crop_result: dict, fert_result: dict, language: str = 
     return "\n".join(lines)
 
 
-def generate_explanation(crop_result: dict, fert_result: dict, language: str = "English") -> str:
+def generate_explanation(crop_result: dict, fert_result: dict, language: str = "English", focus: str = "crop") -> str:
     """
     crop_result: {"top_prediction": str, "confidence": float, "top_5": [(crop, prob), ...]}
     fert_result: output of fertilizer_logic.get_fertilizer_recommendation()
     api_key: Reserved for compatibility. Gemini API key is loaded from the environment.
     language: target language for the explanation, e.g. "Hindi", "Spanish".
+    focus: "crop" (default) leads with why the crop is a good fit -- unchanged
+        existing behavior for all current callers. "fertilizer" leads with the
+        fertilizer recommendation instead, for callers (e.g. the Fertilizer
+        Recommendation page) whose explanation should be about the fertilizer
+        being shown rather than the earlier crop prediction.
     """
 
-    prompt = f"""You are an agricultural extension officer talking to a farmer.
+    if focus == "fertilizer":
+        prompt = f"""You are an agricultural extension officer talking to a farmer.
+
+Soil test vs. ideal levels for their {fert_result['crop']} crop:
+- Nitrogen (N): farmer's soil = {fert_result['input']['N']}, ideal = {fert_result['ideal']['N']} -> status: {fert_result['status']['N']}
+- Phosphorus (P): farmer's soil = {fert_result['input']['P']}, ideal = {fert_result['ideal']['P']} -> status: {fert_result['status']['P']}
+- Potassium (K): farmer's soil = {fert_result['input']['K']}, ideal = {fert_result['ideal']['K']} -> status: {fert_result['status']['K']}
+- Soil pH: farmer's soil = {fert_result['input']['ph']}, ideal = {fert_result['ideal']['ph']}
+
+Fertilizer recommendations: {fert_result['recommendations']}
+pH note: {fert_result.get('ph_note')}
+
+Write a short (120-180 word), warm, plain-language explanation in {language} for a
+smallholder farmer with no technical background. Explain:
+1) exactly what fertilizer(s) to apply and why,
+2) what's off in their soil in simple terms,
+3) how this will help their {fert_result['crop']} crop.
+Do not use bullet points with technical jargon like 'z-score' or 'std dev'. Be practical.
+"""
+    else:
+        prompt = f"""You are an agricultural extension officer talking to a farmer.
 
 ML model output:
 - Recommended crop: {crop_result['top_prediction']} (confidence {crop_result['confidence']:.1f}%)
