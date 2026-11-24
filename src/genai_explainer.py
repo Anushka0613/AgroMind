@@ -11,7 +11,6 @@ import os
 import streamlit as st
 from dotenv import load_dotenv
 from google import genai
-import time
 
 load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -111,27 +110,16 @@ smallholder farmer with no technical background. Explain:
 Do not use bullet points with technical jargon like 'z-score' or 'std dev'. Be practical.
 """
 
-    start_time = time.perf_counter()
-
     
-
     try:
         response = client.models.generate_content(
             model="gemini-3.6-flash",
             contents=prompt,
         )
-
-        elapsed = time.perf_counter() - start_time
-        print(f"Gemini response time: {elapsed:.2f} seconds")
-
         return response.text
 
     except Exception as e:
-        elapsed = time.perf_counter() - start_time
-
-        print(f"Gemini failed after {elapsed:.2f} seconds")
         print(f"Actual Gemini error: {repr(e)}")
-
         st.error(f"Gemini Error: {type(e).__name__}: {e}")
 
         return (
@@ -139,5 +127,6 @@ Do not use bullet points with technical jargon like 'z-score' or 'std dev'. Be p
             f"Recommended Crop: {crop_result['top_prediction']}\n\n"
             f"Your crop and fertilizer recommendations are still valid."
         )
+
 
 
