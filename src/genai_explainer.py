@@ -111,7 +111,7 @@ smallholder farmer with no technical background. Explain:
 Do not use bullet points with technical jargon like 'z-score' or 'std dev'. Be practical.
 """
 
-        start_time = time.perf_counter()
+    start_time = time.perf_counter()
 
     
 
